@@ -36,6 +36,10 @@ class User{
     }
 
     createUser(firstName, lastName, roleOfUser){
+        if(this.isActive==false){
+            console.log("Deleted entities cannot create user")
+            return
+        }
         if(this.isAdmin == false){
             console.log("Only admin can create users")
             return
@@ -45,6 +49,10 @@ class User{
     }
 
     createContact(firstName, lastName, contactType, contactNumber){
+        if(this.isActive==false){
+            console.log("Deleted entities cannot create contact")
+            return
+        }
         let newContact = new Contact(firstName, lastName)
         
         this.contacts.push(newContact)
@@ -54,6 +62,10 @@ class User{
     }
 
     addContactDetails(firstName, lastName, contactType, contactNumber){
+        if(this.isActive==false){
+            console.log("Deleted entities cannot add contact details")
+            return
+        }
         if(typeof(firstName)!='string'){
             console.log("First Name passed is not a string")
             return
@@ -73,6 +85,10 @@ class User{
     }
 
     createUserContact(userFirstName, userLastName, contactFirstName, contactLastName, contactType, contactNumber){
+        if(this.isActive==false){
+            console.log("Deleted entities cannot create user's contact")
+            return
+        }
         if(this.isAdmin == false){
             console.log("Only admin can create other user's contact")
             return
@@ -97,6 +113,10 @@ class User{
     }
 
     addUserContactDetails(userFirstName, userLastName, contactFirstName, contactLastName, contactType, contactNumber){
+        if(this.isActive==false){
+            console.log("Deleted entities cannot create user's contact details")
+            return
+        }
         if(this.isAdmin == false){
             console.log("Only admin can add to other user's contact details")
             return
@@ -121,6 +141,10 @@ class User{
     }
 
     displaySelf(){
+        if(this.isActive==false){
+            console.log("Deleted entities cannot display itself")
+            return
+        }
         console.log("User Name :",this.firstName,this.lastName)
         for(let i in this.contacts){
             if(this.contacts[i].isActive==true){
@@ -131,6 +155,10 @@ class User{
     }
 
     displayUser(firstName, lastName){
+        if(this.isActive==false){
+            console.log("Deleted entities cannot display user")
+            return
+        }
         if(this.isAdmin == false){
             console.log("Only admin can display other users")
             return
@@ -155,6 +183,10 @@ class User{
     }
     
     displayAllUsers(){
+        if(this.isActive==false){
+            console.log("Deleted entities cannot display all users")
+            return
+        }
         if(this.isAdmin == false){
             console.log("Only admin can display all users")
             return
@@ -204,6 +236,10 @@ class User{
     }
 
     updateSelf(updateDetail, updateValue){
+        if(this.isActive==false){
+            console.log("Deleted entities cannot update itself")
+            return
+        }
         switch(updateDetail){
             case "firstName":
                 this.updateFirstName(updateValue)
@@ -221,6 +257,10 @@ class User{
     }
 
     updateSelfContact(firstName, lastName, updateDetail, updateValue){
+        if(this.isActive==false){
+            console.log("Deleted entities cannot update their contact")
+            return
+        }
         if(typeof(firstName)!='string'){
             console.log("First Name passed is not a string")
             return
@@ -241,6 +281,10 @@ class User{
     }
 
     updateSelfContactDetails(firstName, lastName, contactType, updateDetail, updateValue){
+        if(this.isActive==false){
+            console.log("Deleted entities cannot update their contact details")
+            return
+        }
         if(typeof(firstName)!='string'){
             console.log("First Name passed is not a string")
             return
@@ -261,6 +305,10 @@ class User{
     }
 
     updateUser(firstName, lastName, updateDetail, updateValue){
+        if(this.isActive==false){
+            console.log("Deleted entities cannot update other user")
+            return
+        }
         if(this.isAdmin == false){
             console.log("Only admin can update other users")
             return
@@ -285,6 +333,10 @@ class User{
     }
 
     updateUserContact(userFirstName, userLastName, contactFirstName, contactLastName, updateDetail, updateValue){
+        if(this.isActive==false){
+            console.log("Deleted entities cannot update other user's contact")
+            return
+        }
         if(this.isAdmin == false){
             console.log("Only admin can update other user's contact")
             return
@@ -309,6 +361,10 @@ class User{
     }
 
     updateUserContactDetails(userFirstName, userLastName, contactFirstName, contactLastName, contactType, updateDetail, updateValue){
+        if(this.isActive==false){
+            console.log("Deleted entities cannot update other user's contact details")
+            return
+        }
         if(this.isAdmin == false){
             console.log("Only admin can update other user's contact details")
             return
@@ -354,11 +410,19 @@ class User{
     }
 
     deleteSelf(){
+        if(this.isActive==false){
+            console.log("This entity is already deleted")
+            return
+        }
         this.isActive = false
         return
     }
 
     deleteUser(firstName, lastName){
+        if(this.isActive==false){
+            console.log("Deleted entities cannot delete other user")
+            return
+        }
         if(this.isAdmin == false){
             console.log("Only admin can delete other users")
             return
@@ -383,6 +447,10 @@ class User{
     }
 
     deleteSelfContact(firstName, lastName){
+        if(this.isActive==false){
+            console.log("Deleted entities cannot delete their contact")
+            return
+        }
         if(typeof(firstName)!='string'){
             console.log("Contact First Name is not a string")
             return
@@ -403,6 +471,10 @@ class User{
     }
 
     deleteUserContact(userFirstName, userLastName, contactFirstName, contactLastName){
+        if(this.isActive==false){
+            console.log("Deleted entities cannot delete other user's contact")
+            return
+        }
         if(this.isAdmin == false){
             console.log("Only admin can delete other user's contact")
             return
@@ -653,6 +725,9 @@ name9.deleteUserContact('fname12', 'lname12', 'fname13', 'lname13')
 
 aryan.deleteUser('fname99', 'lname99')
 aryan.deleteUserContact('fname12', 'lname12', 'fname13', 'lname13')
+
+name9.createContact('fname14', 'lname14', 'home', 3344)
+aryan.createUserContact('fname99', 'lname99', 'fname14', 'lname14', 'home', 3344)
 
 aryan.displayAllUsers()
 name8.displayAllUsers()
